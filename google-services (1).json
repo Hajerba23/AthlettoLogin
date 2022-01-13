@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "446721117599",
+    "project_id": "athlettologin",
+    "storage_bucket": "athlettologin.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:446721117599:android:f8abb815f7c57d908f41aa",
+        "android_client_info": {
+          "package_name": "com.athlettologin.athletto_login"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "446721117599-i6cciti0cml0g9jg6hofsnonv1f97gqf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj0T6XfOX4lxYJY0MuK-AqdSUXYj7lA8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "446721117599-i6cciti0cml0g9jg6hofsnonv1f97gqf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
