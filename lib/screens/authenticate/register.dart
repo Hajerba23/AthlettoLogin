@@ -24,11 +24,19 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: Colors.grey,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: Colors.grey[800],
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        title: Center(
+          child: Text(
+            'ATHLETTO',
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.grey[500],
+            ),
+          ),
+        ),
         actions: <Widget>[
           FlatButton.icon(
             icon: Icon(Icons.person),
@@ -37,35 +45,94 @@ class _RegisterState extends State<Register> {
           ),
         ],
       ),
-      body: Container(
-        padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20.0),
-              TextFormField(
-                validator: (val) => val!.isEmpty ? 'Enter an email' : null,
-                onChanged: (val) {
-                  setState(() => email = val);
-                },
-              ),
-              SizedBox(height: 20.0),
-              TextFormField(
-                obscureText: true,
-                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
-                onChanged: (val) {
-                  setState(() => password = val);
-                },
-              ),
-              SizedBox(height: 20.0),
-              RaisedButton(
-                color: Colors.pink[400],
-                child: Text(
-                  'Register',
-                  style: TextStyle(color: Colors.white),
+
+// you can click on sign in if you have already registred
+
+      body: Padding(
+      padding: EdgeInsets.all(10),
+      child: Form(
+        key: _formKey,
+        child: Stack(
+          children: <Widget>[
+            Positioned(
+              top: 80,
+              left: 70,
+              child: Container(
+                height: 250,
+                width: 350,
+                color: Colors.grey[400],
+                // padding: EdgeInsets.fromLTRB(10, 0, 10, 0)
+                child: Center(
+                  child: Container(
+                    color: Colors.grey[200],
+                    height: 160,
+                    width: 300,
+                    child: Stack(
+                      children: <Widget>[
+
+                        Positioned.fromRect(
+                          rect: Rect.fromCenter(center: Offset(150, 45), width: 250, height: 60),
+                          child: Container(
+                            width: 50, 
+                            height: 100, 
+                            color: Colors.blue[100],
+                            padding: EdgeInsets.all(10),
+                            child: TextFormField(
+                                    decoration: const InputDecoration(
+                                    icon: Icon(Icons.mail),
+                                    ),
+                                    validator: (val) => val!.isEmpty ? 'Enter an email' : null,
+                                    onChanged: (val) {
+                                    setState(() => email = val);
+                                    },
+                                  ),
+                          ),
+                        ),
+                        //if the email box is empty, the message "Enter you email" shows up in red
+
+                        Positioned.fromRect(
+                          rect: Rect.fromCenter(center: Offset(150, 115), width: 250, height: 60),
+                          child: Container(
+                            width: 50, 
+                            height: 100, 
+                            color: Colors.blue[100],
+                            padding: EdgeInsets.all(10),
+                            child: TextFormField(
+                                    decoration: const InputDecoration(
+                                      icon: Icon(Icons.lock_open),
+                                      //border: OutlineInputBorder(),
+                                      //hintText: 'Enter your password',
+                                      //labelText: 'Password :',
+                                      ),
+                                     obscureText: true,
+                                     validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars' : null,
+                                     onChanged: (val) {
+                                     setState(() => password = val);
+                                      },
+                                    ),                     
+                              ),
+                            ),
+                      ],
+                    ),
+                                
+                  ),
                 ),
-                onPressed: () async {
+              ),
+            ),
+
+            Positioned(
+              top: 360,
+              left: 120,
+              child: Container(
+                //lezem yemchi a droite akther
+                height: 40,
+                width: 250,
+                padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                child: RaisedButton(
+                  textColor: Colors.black,
+                  color: Colors.grey[350],
+                  child: Text('Sign up'),
+                  onPressed: () async {
                   if(_formKey.currentState!.validate()){
                     dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if(result == null) {
@@ -73,18 +140,28 @@ class _RegisterState extends State<Register> {
                         error = 'Please supply a valid email';
                       });
                     }
+                  }                 
                   }
-                }
+                ),
               ),
-              SizedBox(height: 12.0),
-              Text(
+            ),
+
+            // the message "please supply a valid email" appears when you enter an invalid email
+
+            Positioned(
+              top: 420,
+              left: 150,
+              child: Text(
                 error,
-                style: TextStyle(color: Colors.red, fontSize: 14.0),
-              )
-            ],
-          ),
-        ),
+                style: TextStyle(color: Colors.red, fontSize: 16.0),
+              ),
+              ),
+ 
+          ],
       ),
+      ),
+      ),
+
     );
   }
 }
